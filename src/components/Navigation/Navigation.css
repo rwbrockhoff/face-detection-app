@@ -1,0 +1,12 @@
+nav {
+    display: flex;
+    align-items: center;
+    background-color: aliceblue;
+    color: black;
+    padding: 20px 40px;
+    height: 10vh;
+}
+
+.sign-in {
+    margin-left: auto;
+}

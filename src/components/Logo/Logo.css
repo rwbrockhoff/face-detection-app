@@ -1,0 +1,6 @@
+.logo {
+    width: 100px;
+    -webkit-box-shadow: 0px 13px 19px -3px rgba(0,0,0,0.8);
+    -moz-box-shadow: 0px 13px 19px -3px rgba(0,0,0,0.8);
+    box-shadow: 0px 13px 19px -3px rgba(0,0,0,0.8);
+}

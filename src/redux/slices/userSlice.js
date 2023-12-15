@@ -2,8 +2,8 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { faceDetectionAPI } from '../../api/axios';
 
 const initialState = {
-  isAuthenticated: true,
-  user: { id: 34, name: '', email: '', entries: 0 },
+  isAuthenticated: false,
+  user: { id: '', name: '', email: '', entries: 0 },
 };
 
 export const registerUser = createAsyncThunk(
@@ -23,14 +23,17 @@ export const registerUser = createAsyncThunk(
 export const signInUser = createAsyncThunk('signInUser', async (formData) => {
   const { email, password } = formData;
   const response = await faceDetectionAPI.post('/signin', { email, password });
-  console.log('Sign In Response: ', response);
   return await response;
 });
 
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {},
+  reducers: {
+    signOutUser: () => {
+      return initialState;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(registerUser.fulfilled, (state, action) => {
       const { user } = action.payload.data;
@@ -45,4 +48,5 @@ export const authSlice = createSlice({
   },
 });
 
+export const { signOutUser } = authSlice.actions;
 export default authSlice.reducer;

@@ -26,7 +26,6 @@ export const imageSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(submitImage.fulfilled, (state, action) => {
       const { payload } = action;
-      console.log();
       if (!payload.length) {
         //show image with no faces found error
         state.noFacesFound = true;

@@ -42,7 +42,6 @@ export default function Search() {
 
   return (
     <div className="gradient-background">
-      <Rank />
       <ImageLinkForm
         inputValue={inputValue}
         onInputChange={onInputChange}

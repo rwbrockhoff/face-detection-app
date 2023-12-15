@@ -29,14 +29,13 @@ export default function Register() {
     const { name, email, password } = formData;
     if (!name || !email || !password) return setFormError(true);
 
-    dispatch(registerUser({ name, email, password })).then(() => {
-      console.log('Reach promise on dispatch!');
-      return isAuthenticated ? navigate('/') : setFormError(true);
-    });
+    dispatch(registerUser({ name, email, password }));
   };
 
   const { name, email, password } = formData;
-  return (
+  return isAuthenticated ? (
+    navigate('/')
+  ) : (
     <div className="gradient-background full-height">
       <img src={Logo} alt="logo" />
       <Form

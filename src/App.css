@@ -11,6 +11,12 @@ h1 {
   justify-content: center;
 }
 
+.flex-center-all {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .gradient-background {
   text-align: center;
   color: white;

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { registerUser } from '../../redux/slices/userSlice';
+import { signInUser } from '../../redux/slices/userSlice';
 import Form from '../../components/Form/Form';
 
 export default function SignIn() {
@@ -28,12 +28,12 @@ export default function SignIn() {
     if (!email || !password) {
       return onFormError();
     }
-    dispatch(registerUser({ name, email, password }));
+    dispatch(signInUser({ email, password }));
   };
 
-  const { name, email, password } = formData;
+  const { email, password } = formData;
   return (
-    <div className="gradient-background">
+    <div className="gradient-background flex-center-all">
       <Form
         isRegistering={false}
         title={'Sign In'}

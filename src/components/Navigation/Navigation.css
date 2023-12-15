@@ -1,12 +1,13 @@
 nav {
-    display: flex;
-    align-items: center;
-    background-color: aliceblue;
-    color: black;
-    padding: 20px 40px;
-    height: 10vh;
+  display: flex;
+  align-items: center;
+  background-color: aliceblue;
+  color: black;
+  padding: 20px 40px;
+  height: 15vh;
+  box-sizing: border-box;
 }
 
 .sign-in {
-    margin-left: auto;
+  margin-left: auto;
 }

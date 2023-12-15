@@ -1,10 +1,12 @@
 import './App.css';
-import Search from "./containers/Search/Search";
+import { Outlet } from 'react-router-dom';
+import Navigation from './components/Navigation/Navigation';
 
 function App() {
   return (
     <div className="App">
-      <Search/>
+      <Navigation />
+      <Outlet />
     </div>
   );
 }

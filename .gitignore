@@ -11,6 +11,9 @@
 # production
 /build
 
+# clarifai
+src/containers/Search/clarifaiVariables.js
+
 # misc
 .DS_Store
 .env.local

@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { Provider } from 'react-redux';
 import './index.css';
+import { store } from './redux/store';
 import App from './App';
 import Search from './containers/Search/Search';
 import Register from './containers/Register/Register';
@@ -16,19 +18,17 @@ const router = createBrowserRouter([
         path: '/',
         element: <Search />,
       },
-      {
-        path: '/register',
-        element: <Register />,
-      },
     ],
   },
-  { path: 'register', element: <Search /> },
+  { path: '/register', element: <Register /> },
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
   </React.StrictMode>
 );
 

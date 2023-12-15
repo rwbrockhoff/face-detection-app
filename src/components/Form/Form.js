@@ -3,6 +3,7 @@ import './Form.css';
 
 const Form = ({
   isRegistering,
+  title = 'Form',
   name,
   email,
   password,
@@ -13,6 +14,7 @@ const Form = ({
   return (
     <>
       <form onSubmit={onSubmit}>
+        <h2>{title}</h2>
         {isRegistering ? (
           <input
             placeholder="Name"
@@ -37,9 +39,7 @@ const Form = ({
         />
         <button>{isRegistering ? 'Register' : 'Sign In'}</button>
         {formError && (
-          <p className="error-text">
-            Error. Please fill out the form properly.
-          </p>
+          <p className="error-text">Sorry! Looks like something went wrong.</p>
         )}
       </form>
     </>

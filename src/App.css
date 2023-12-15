@@ -6,18 +6,27 @@ h1 {
   margin: 0;
 }
 
+.flex-center {
+  display: flex;
+  justify-content: center;
+}
+
 .gradient-background {
   text-align: center;
   color: white;
   height: 85vh;
   box-sizing: border-box;
-  padding-top: 50px;
   background: linear-gradient(270deg, #246655, #20cea1);
   background-size: 600% 600%;
   overflow: auto;
   -webkit-animation: BackgroundGradientAnimation 30s ease infinite;
   -moz-animation: BackgroundGradientAnimation 30s ease infinite;
   animation: BackgroundGradientAnimation 30s ease infinite;
+}
+
+.full-height {
+  height: 100vh;
+  overflow: auto;
 }
 
 @-webkit-keyframes BackgroundGradientAnimation {

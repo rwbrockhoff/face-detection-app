@@ -1,59 +1,54 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { registerUser } from '../../redux/slices/userSlice';
 import Form from '../../components/Form/Form';
-import { faceDetectionAPI } from '../../axios';
+import Logo from '../../assets/logo.png';
 
-class Register extends Component {
-  constructor() {
-    super();
-    this.state = {
-      name: '',
-      email: '',
-      password: '',
-      formError: false,
-    };
-  }
+export default function Register() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    password: '',
+  });
+  const [formError, setFormError] = useState(false);
+  const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
 
-  onFormChange = (e) => {
-    this.setState({ [e.target.name]: e.target.value });
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const onFormChange = (e) => {
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [e.target.name]: e.target.value,
+    }));
   };
 
-  onFormError = () => {
-    this.setState({ formError: true });
-  };
-
-  onFormRegister = async (e) => {
+  const onFormRegister = (e) => {
     e.preventDefault();
-    const { name, email, password } = this.state;
-    if (!name || !email || !password) return this.onFormError();
-    try {
-      const { response } = await faceDetectionAPI.post('/register', {
-        name,
-        email,
-        password,
-      });
-      if (response.user) this.setState({ user: response.user });
-    } catch (error) {
-      this.onFormError();
-    }
+    const { name, email, password } = formData;
+    if (!name || !email || !password) return setFormError(true);
+
+    dispatch(registerUser({ name, email, password })).then(() => {
+      console.log('Reach promise on dispatch!');
+      return isAuthenticated ? navigate('/') : setFormError(true);
+    });
   };
 
-  render() {
-    const { name, email, password, formError } = this.state;
-    return (
-      <div className="gradient-background">
-        <h2 className="title">Register</h2>
-        <Form
-          isRegistering={true}
-          name={name}
-          email={email}
-          password={password}
-          formError={formError}
-          onChange={this.onFormChange}
-          onSubmit={this.onFormRegister}
-        />
-      </div>
-    );
-  }
+  const { name, email, password } = formData;
+  return (
+    <div className="gradient-background full-height">
+      <img src={Logo} alt="logo" />
+      <Form
+        isRegistering={true}
+        title={'Register'}
+        name={name}
+        email={email}
+        password={password}
+        formError={formError}
+        onChange={onFormChange}
+        onSubmit={onFormRegister}
+      />
+    </div>
+  );
 }
-
-export default Register;

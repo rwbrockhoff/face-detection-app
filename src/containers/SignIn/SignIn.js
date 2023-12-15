@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { signInUser } from '../../redux/slices/userSlice';
 import Form from '../../components/Form/Form';
 
@@ -8,7 +8,12 @@ export default function SignIn() {
     email: '',
     password: '',
   });
-  const [formError, setFormError] = useState(false);
+
+  const authError = useSelector((state) => ({
+    error: state.user.authError,
+    message: state.user.authErrorMessage,
+  }));
+
   const dispatch = useDispatch();
 
   const onFormChange = (e) => {
@@ -18,15 +23,11 @@ export default function SignIn() {
     }));
   };
 
-  const onFormError = () => {
-    setFormError(true);
-  };
-
   const onSignIn = (e) => {
     e.preventDefault();
     const { email, password } = formData;
     if (!email || !password) {
-      return onFormError();
+      // return onFormError();
     }
     dispatch(signInUser({ email, password }));
   };
@@ -39,7 +40,8 @@ export default function SignIn() {
         title={'Sign In'}
         email={email}
         password={password}
-        formError={formError}
+        formError={authError.error}
+        formErrorMessage={authError.message}
         onChange={onFormChange}
         onSubmit={onSignIn}
       />

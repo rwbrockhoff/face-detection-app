@@ -3,6 +3,8 @@ import { faceDetectionAPI } from '../../api/axios';
 
 const initialState = {
   isAuthenticated: false,
+  authError: false,
+  authErrorMessage: '',
   user: { id: '', name: '', email: '', entries: 0 },
 };
 
@@ -40,10 +42,22 @@ export const authSlice = createSlice({
       state.user = user;
       state.isAuthenticated = true;
     });
+    builder.addCase(registerUser.rejected, (state, action) => {
+      const { payload } = action;
+      state.authError = true;
+      if (payload && payload.authErrorMessage)
+        state.authErrorMessage = payload.authErrorMessage;
+    });
     builder.addCase(signInUser.fulfilled, (state, action) => {
       const { user } = action.payload.data;
       state.user = user;
       state.isAuthenticated = true;
+    });
+    builder.addCase(signInUser.rejected, (state, action) => {
+      const { payload } = action;
+      state.authError = true;
+      if (payload && payload.authErrorMessage)
+        state.authErrorMessage = payload.authErrorMessage;
     });
   },
 });

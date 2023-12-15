@@ -8,6 +8,7 @@ const Form = ({
   email,
   password,
   formError,
+  formErrorMessage,
   onChange,
   onSubmit,
 }) => {
@@ -39,7 +40,9 @@ const Form = ({
         />
         <button>{isRegistering ? 'Register' : 'Sign In'}</button>
         {formError && (
-          <p className="error-text">Sorry! Looks like something went wrong.</p>
+          <p className="error-text">
+            {formErrorMessage || 'Sorry! Looks like something went wrong.'}
+          </p>
         )}
       </form>
     </>

@@ -11,8 +11,11 @@ export default function Register() {
     email: '',
     password: '',
   });
-  const [formError, setFormError] = useState(false);
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
+  const authError = useSelector((state) => ({
+    error: state.user.authError,
+    message: state.user.authErrorMessage,
+  }));
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -27,7 +30,9 @@ export default function Register() {
   const onFormRegister = (e) => {
     e.preventDefault();
     const { name, email, password } = formData;
-    if (!name || !email || !password) return setFormError(true);
+    if (!name || !email || !password) {
+      // return setFormError(true);
+    }
 
     dispatch(registerUser({ name, email, password }));
   };
@@ -44,7 +49,8 @@ export default function Register() {
         name={name}
         email={email}
         password={password}
-        formError={formError}
+        formError={authError.error}
+        formErrorMessage={authError.message}
         onChange={onFormChange}
         onSubmit={onFormRegister}
       />

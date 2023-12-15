@@ -3,9 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import './Search.css';
 import ImageLinkForm from '../../components/ImageLinkForm/ImageLinkForm';
 import FaceRecognitionPanel from '../../components/FaceRecognitionPanel/FaceRecognitionPanel';
-import Rank from '../../components/Rank/Rank';
 import { submitImage, setImageURL } from '../../redux/slices/imageSlice';
-import { faceDetectionAPI } from '../../api/axios';
 
 export default function Search() {
   const [inputValue, setInputValue] = useState('');
@@ -31,13 +29,6 @@ export default function Search() {
       setInputValue('');
       inputError && setInputError(false);
     });
-  };
-
-  const updateEntries = async () => {
-    const { id, entries } = this.state.user;
-    const response = await faceDetectionAPI.put('/user/entry', { id, entries });
-    let newEntries = response.data.entries++;
-    this.setState({ entries: newEntries++ });
   };
 
   return (
